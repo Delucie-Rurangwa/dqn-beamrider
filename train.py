@@ -179,6 +179,20 @@ def save_plot(log, path, title):
     plt.close()
 
 
+def save_results(online_net, log, out_dir, args):
+    """Save the model, the training log, the plot and a short summary."""
+    torch.save(online_net.state_dict(), os.path.join(out_dir, "dqn_model.pth"))
+    save_log(log, os.path.join(out_dir, "training_log.csv"))
+    save_plot(log, os.path.join(out_dir, "training_plot.png"), f"{args.member} - {args.exp}")
+    final_avg = float(np.mean([row["reward"] for row in log[-20:]]))
+    summary = {**vars(args), "episodes": len(log), "total_steps_done": log[-1]["total_steps"],
+               "avg_reward_last_20": round(final_avg, 2),
+               "best_episode_reward": max(row["reward"] for row in log)}
+    with open(os.path.join(out_dir, "summary.json"), "w") as f:
+        json.dump(summary, f, indent=2)
+    return final_avg
+
+
 # ---------------------------------------------------------------------------
 # 7. Main training loop
 # ---------------------------------------------------------------------------
@@ -230,6 +244,11 @@ def train(args):
         if step % args.target_update == 0:
             target_net.load_state_dict(online_net.state_dict())
 
+        # save a checkpoint every 50,000 steps (so a crash or power cut does not lose everything)
+        if step % 50_000 == 0 and log:
+            save_results(online_net, log, out_dir, args)
+            print(f"Checkpoint saved at step {step}")
+
         if done:
             episode += 1
             log.append({"episode": episode, "total_steps": step, "episode_length": episode_length,
@@ -243,15 +262,7 @@ def train(args):
     env.close()
 
     # save everything for this experiment
-    torch.save(online_net.state_dict(), os.path.join(out_dir, "dqn_model.pth"))
-    save_log(log, os.path.join(out_dir, "training_log.csv"))
-    save_plot(log, os.path.join(out_dir, "training_plot.png"), f"{args.member} - {args.exp}")
-    final_avg = float(np.mean([row["reward"] for row in log[-20:]]))
-    summary = {**vars(args), "episodes": episode, "avg_reward_last_20": round(final_avg, 2),
-               "best_episode_reward": max(row["reward"] for row in log)}
-    with open(os.path.join(out_dir, "summary.json"), "w") as f:
-        json.dump(summary, f, indent=2)
-
+    final_avg = save_results(online_net, log, out_dir, args)
     print(f"\nDone. Avg reward (last 20 episodes): {final_avg:.2f}")
     print(f"Saved model, log and plot in: {out_dir}")
 
