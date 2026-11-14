@@ -3,7 +3,7 @@
 **Member Name:** Delucie Rurangwa
 
 **Environment:** ALE/BeamRider-v5  
-**Focus of my experiments:** learning rate, gamma and batch size  
+**Focus of my experiments:** learning rate, gamma and batch size. Experiments 11–15 test combinations around the best settings found in 1–10 (lr 0.0001, gamma 0.90).  
 **Fixed settings (same for all runs):** 100,000 steps, replay buffer 30,000, learning starts 10,000, target update every 1,000 steps, Adam optimizer, Huber loss, train every 4 steps.  
 **Epsilon decay** = number of steps for epsilon to go from *Epsilon start* to *Epsilon end* (linear).
 
@@ -22,6 +22,11 @@
 | 8 | 0.0001 | 0.99 | 64 | 1.0 | 0.05 | 50000 | 394.0 | Bigger batch. Smooth but slower progress than batch 32. |
 | 9 | 0.0001 | 0.99 | 16 | 1.0 | 0.05 | 50000 | 354.2 | Small batch. Noisy updates; reward dropped after exploration ended. |
 | 10 | 0.00025 | 0.99 | 64 | 1.0 | 0.01 | 75000 | 391.6 | Mixed setting. Explored longer, so it had less time to exploit; average result. |
+| 11 | 0.0001 | 0.85 | 32 | 1.0 | 0.05 | 50000 | _fill in_ | _fill in after training_ |
+| 12 | 0.0001 | 0.90 | 64 | 1.0 | 0.05 | 50000 | _fill in_ | _fill in after training_ |
+| 13 | 0.00025 | 0.90 | 32 | 1.0 | 0.05 | 50000 | _fill in_ | _fill in after training_ |
+| 14 | 0.0001 | 0.90 | 32 | 1.0 | 0.01 | 50000 | _fill in_ | _fill in after training_ |
+| 15 | 0.00005 | 0.90 | 32 | 1.0 | 0.05 | 50000 | _fill in_ | _fill in after training_ |
 
 ## Best configuration
 **Experiment 6** (lr 0.0001, gamma 0.90, batch 32, epsilon 1.0 → 0.05 over 50,000 steps), average reward **542.0**, about 1.7× a random agent.

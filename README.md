@@ -6,8 +6,8 @@ We built a Deep Q-Network agent **from scratch** with PyTorch and Gymnasium (no 
 ### Group members
 | Name | Role |
 |---|---|
-| Delucie Rurangwa | DQN implementation, 10 experiments (learning rate, gamma, batch size) |
-| Favor Ekep-Obasi Ayuk | play.py, README/plots, 10 experiments (epsilon / exploration) |
+| Delucie Rurangwa | DQN implementation, 15 experiments (learning rate, gamma, batch size) |
+| Favor Ekep-Obasi Ayuk | play.py, README/plots, 15 experiments (epsilon / exploration) |
 
 See `Task allocation sheet.pdf` for the full split of work.
 
@@ -61,8 +61,8 @@ flowchart TD
 ```bash
 uv sync                                   # install everything
 uv run train.py --member Delucie_Rurangwa --exp exp1 --lr 0.0001 --gamma 0.99 --batch-size 32 --eps-start 1.0 --eps-end 0.05 --eps-decay 50000 --total-steps 100000
-uv run run_experiments.py --member delucie  # Delucie's 10 experiments
-uv run run_experiments.py --member favor    # Favor's 10 experiments
+uv run run_experiments.py --member delucie  # Delucie's 15 experiments
+uv run run_experiments.py --member favor    # Favor's 15 experiments
 uv run play.py                            # watch the best agent play (uses dqn_model.pth)
 ```
 Each experiment is saved in `models/<member name>/<exp>/`:
@@ -70,11 +70,13 @@ Each experiment is saved in `models/<member name>/<exp>/`:
 The best model is copied to the repo root as `dqn_model.pth`.
 
 ## Hyperparameter experiments
+The assignment asks for 10 experiments per member in groups of 3 (30 in total). Our group has only 2 members, so each of us ran **15 experiments** to keep the same total of 30.
+
 - [Delucie Rurangwa — results](Delucie_Rurangwa_Hyperparameter_experiment_results.md)
 - [Favor Ekep-Obasi Ayuk — results](Favor_Ekep-Obasi_Ayuk_Hyperparameter_experiment_results.md)
 
 ## Best experiment — training performance
-Each member ran 10 short experiments (100,000 steps each). The best one was **Delucie's exp6**
+Each member ran 15 short experiments (100,000 steps each). The best one was **Delucie's exp6**
 (learning rate 0.0001, gamma 0.90, batch size 32, epsilon 1.0 → 0.05 over 50,000 steps), with an
 average reward of 542. We then trained this best configuration for longer (**500,000 steps**) to get
 the final model `dqn_model.pth`. Files: `models/Delucie_Rurangwa/best_long/`.

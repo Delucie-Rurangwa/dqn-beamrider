@@ -19,14 +19,13 @@ FIRE = 1  # FIRE starts the game (safe to press in any Atari game)
 def play(model_path, episodes):
     device = "cuda" if torch.cuda.is_available() else "mps" if torch.backends.mps.is_available() else "cpu"
 
-    # same Atari environment, but shown on screen in real time
     env = make_env(render_mode="human")
     n_actions = env.action_space.n
 
     # rebuild the same network and load the trained weights
     q_net = QNetwork(n_actions).to(device)
     q_net.load_state_dict(torch.load(model_path, map_location=device))
-    q_net.eval()  # evaluation mode (no training)
+    q_net.eval()  
 
     for episode in range(1, episodes + 1):
         state, info = env.reset()
@@ -35,7 +34,6 @@ def play(model_path, episodes):
         total_reward, done = 0.0, False
 
         while not done:
-            # greedy action: always the highest Q-value (no random moves)
             with torch.no_grad():
                 state_t = torch.tensor(np.array(state), device=device).unsqueeze(0)
                 action = int(q_net(state_t).argmax(dim=1).item())

@@ -1,11 +1,11 @@
 """
-run_experiments.py - Run the 10 hyperparameter experiments of one member.
+run_experiments.py - Run the 15 hyperparameter experiments of one member.
 Works on Windows, Mac and Linux.
 
 Example:
     uv run run_experiments.py --member delucie
     uv run run_experiments.py --member favor
-    uv run run_experiments.py --member delucie --start 4    # continue from exp4
+    uv run run_experiments.py --member delucie --start 11   # only run exp11 to exp15
 """
 
 import argparse
@@ -28,6 +28,12 @@ EXPERIMENTS = {
             (0.0001, 0.99, 64, 1.0, 0.05, 50000),
             (0.0001, 0.99, 16, 1.0, 0.05, 50000),
             (0.00025, 0.99, 64, 1.0, 0.01, 75000),
+            # extra experiments 11-15 (built on what worked best: lr 0.0001, gamma 0.90)
+            (0.0001, 0.85, 32, 1.0, 0.05, 50000),
+            (0.0001, 0.90, 64, 1.0, 0.05, 50000),
+            (0.00025, 0.90, 32, 1.0, 0.05, 50000),
+            (0.0001, 0.90, 32, 1.0, 0.01, 50000),
+            (0.00005, 0.90, 32, 1.0, 0.05, 50000),
         ],
     },
     # Favor: exploration (epsilon) and mixed combinations
@@ -44,6 +50,12 @@ EXPERIMENTS = {
             (0.0001, 0.99, 128, 1.0, 0.05, 50000),
             (0.0005, 0.95, 64, 1.0, 0.10, 25000),
             (0.00025, 0.99, 32, 1.0, 0.01, 60000),
+            # extra experiments 11-15
+            (0.0001, 0.99, 32, 1.0, 0.05, 75000),
+            (0.0001, 0.99, 32, 0.8, 0.05, 50000),
+            (0.0001, 0.90, 32, 1.0, 0.01, 25000),
+            (0.0001, 0.95, 32, 1.0, 0.02, 40000),
+            (0.0001, 0.99, 32, 1.0, 0.20, 50000),
         ],
     },
 }
