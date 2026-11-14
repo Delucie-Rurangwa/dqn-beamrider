@@ -21,6 +21,11 @@
 | 8 | 0.0001 | .99 | 128 | 1.0 | 0.05 | 50000 | _fill in_ | _fill in after training_ |
 | 9 | 0.0005 | .95 | 64 | 1.0 | 0.10 | 25000 | _fill in_ | _fill in after training_ |
 | 10 | 0.00025 | .99 | 32 | 1.0 | 0.01 | 60000 | _fill in_ | _fill in after training_ |
+| 11 | 0.0001 | .99 | 32 | 1.0 | 0.05 | 75000 | _fill in_ | _fill in after training_ |
+| 12 | 0.0001 | .99 | 32 | 0.8 | 0.05 | 50000 | _fill in_ | _fill in after training_ |
+| 13 | 0.0001 | .90 | 32 | 1.0 | 0.01 | 25000 | _fill in_ | _fill in after training_ |
+| 14 | 0.0001 | .95 | 32 | 1.0 | 0.02 | 40000 | _fill in_ | _fill in after training_ |
+| 15 | 0.0001 | .99 | 32 | 1.0 | 0.20 | 50000 | _fill in_ | _fill in after training_ |
 
 ## Best configuration
 Experiment: _fill in_ — why it worked: _fill in_

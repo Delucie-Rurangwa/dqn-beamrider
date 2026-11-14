@@ -1,0 +1,19 @@
+{
+  "member": "Delucie_Rurangwa",
+  "exp": "best_long",
+  "lr": 0.0001,
+  "gamma": 0.9,
+  "batch_size": 32,
+  "eps_start": 1.0,
+  "eps_end": 0.05,
+  "eps_decay": 50000,
+  "total_steps": 500000,
+  "buffer_size": 30000,
+  "learning_starts": 10000,
+  "target_update": 1000,
+  "seed": 42,
+  "episodes": 352,
+  "total_steps_done": 499812,
+  "avg_reward_last_20": 993.6,
+  "best_episode_reward": 2272.0
+}

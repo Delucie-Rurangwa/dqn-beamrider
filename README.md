@@ -6,8 +6,8 @@ We built a Deep Q-Network agent **from scratch** with PyTorch and Gymnasium (no 
 ### Group members
 | Name | Role |
 |---|---|
-| Delucie Rurangwa | DQN implementation, 10 experiments (learning rate, gamma, batch size) |
-| Favor Ekep-Obasi Ayuk | play.py, README/plots, 10 experiments (epsilon / exploration) |
+| Delucie Rurangwa | DQN implementation, 15 experiments (learning rate, gamma, batch size) |
+| Favor Ekep-Obasi Ayuk | play.py, README/plots, 15 experiments (epsilon / exploration) |
 
 See `Task allocation sheet.pdf` for the full split of work.
 
@@ -60,9 +60,9 @@ flowchart TD
 ## How to run (uv)
 ```bash
 uv sync                                   # install everything
-uv run train.py --member Delucie_Rurangwa --exp exp1 --lr 0.0001 --gamma 0.99 --batch-size 32 --eps-start 1.0 --eps-end 0.05 --eps-decay 100000
-uv run run_experiments.py --member delucie  # Delucie's 10 experiments
-uv run run_experiments.py --member favor    # Favor's 10 experiments
+uv run train.py --member Delucie_Rurangwa --exp exp1 --lr 0.0001 --gamma 0.99 --batch-size 32 --eps-start 1.0 --eps-end 0.05 --eps-decay 50000 --total-steps 100000
+uv run run_experiments.py --member delucie  # Delucie's 15 experiments
+uv run run_experiments.py --member favor    # Favor's 15 experiments
 uv run play.py                            # watch the best agent play (uses dqn_model.pth)
 ```
 Each experiment is saved in `models/<member name>/<exp>/`:
@@ -70,21 +70,40 @@ Each experiment is saved in `models/<member name>/<exp>/`:
 The best model is copied to the repo root as `dqn_model.pth`.
 
 ## Hyperparameter experiments
+The assignment asks for 10 experiments per member in groups of 3 (30 in total). Our group has only 2 members, so each of us ran **15 experiments** to keep the same total of 30.
+
 - [Delucie Rurangwa — results](Delucie_Rurangwa_Hyperparameter_experiment_results.md)
 - [Favor Ekep-Obasi Ayuk — results](Favor_Ekep-Obasi_Ayuk_Hyperparameter_experiment_results.md)
 
 ## Best experiment — training performance
-Best experiment: **_fill in_** (`models/<name>/<exp>/`)
+Each member ran 15 short experiments (100,000 steps each). The best one was **Delucie's exp6**
+(learning rate 0.0001, gamma 0.90, batch size 32, epsilon 1.0 → 0.05 over 50,000 steps), with an
+average reward of 542. We then trained this best configuration for longer (**500,000 steps**) to get
+the final model `dqn_model.pth`. Files: `models/Delucie_Rurangwa/best_long/`.
 
-![Training plot of best experiment](models/Delucie_Rurangwa/exp1/training_plot.png)
+![Training plot of the best experiment](models/Delucie_Rurangwa/best_long/training_plot.png)
 
 | Metric | Value |
 |---|---|
-| Total steps | 200,000 |
-| Episodes played | _fill in_ |
-| Average episode length (last 20) | _fill in_ |
-| Average reward (last 20 episodes) | _fill in_ |
-| Best episode reward | _fill in_ |
+| Learning rate / Gamma / Batch size | 0.0001 / 0.90 / 32 |
+| Epsilon | 1.0 → 0.05 over 50,000 steps |
+| Total steps | 499,812 (500,000 planned) |
+| Episodes played | 352 |
+| Average episode length | about 1,400 steps |
+| Average reward (last 20 episodes) | **993.6** |
+| Best episode reward | **2,272** |
+| Random agent (for comparison) | about 260–330 |
+
+**What happened during training:** for the first 50,000 steps the agent was mostly exploring
+(high epsilon), so rewards stayed near random level (~300–350). After epsilon reached 0.05,
+the reward started to rise: about 550 at 100k steps, about 750 at 250k steps, and about
+900–1,100 from 300k steps onwards. The full log (episode, total steps, episode length, reward,
+epsilon) is in `training_log.csv`.
+
+**Evaluation with `play.py`** (fully greedy, no random actions), 5 games:
+1236, 1432, 660, 852, 804 → average **about 1,000 points**, around 3–4× a random agent.
+Scores change between games because BeamRider has built-in randomness (sticky actions and
+different starting conditions).
 
 ## Gameplay Demonstration
 Video of the best agent: **_add video link here_**
