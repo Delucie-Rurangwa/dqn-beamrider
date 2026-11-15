@@ -1,0 +1,19 @@
+{
+  "member": "Favor_Ekep-Obasi_Ayuk",
+  "exp": "exp13",
+  "lr": 0.0001,
+  "gamma": 0.9,
+  "batch_size": 32,
+  "eps_start": 1.0,
+  "eps_end": 0.01,
+  "eps_decay": 25000,
+  "total_steps": 100000,
+  "buffer_size": 30000,
+  "learning_starts": 10000,
+  "target_update": 1000,
+  "seed": 42,
+  "episodes": 68,
+  "total_steps_done": 99751,
+  "avg_reward_last_20": 445.8,
+  "best_episode_reward": 804.0
+}
