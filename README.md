@@ -106,4 +106,4 @@ Scores change between games because BeamRider has built-in randomness (sticky ac
 different starting conditions).
 
 ## Gameplay Demonstration
-Video of the best agent: **_add video link here_**
+Video of the best agent: **https://youtu.be/HukXDl_t5hg**
