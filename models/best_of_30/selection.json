@@ -1,0 +1,23 @@
+{
+  "source": "models/Delucie_Rurangwa/exp6",
+  "metric": "avg_reward_last_20",
+  "score": 542.0,
+  "experiment": {
+    "member": "Delucie_Rurangwa",
+    "exp": "exp6",
+    "lr": 0.0001,
+    "gamma": 0.9,
+    "batch_size": 32,
+    "eps_start": 1.0,
+    "eps_end": 0.05,
+    "eps_decay": 50000,
+    "total_steps": 100000,
+    "buffer_size": 30000,
+    "learning_starts": 10000,
+    "target_update": 1000,
+    "seed": 42,
+    "episodes": 65,
+    "avg_reward_last_20": 542.0,
+    "best_episode_reward": 804.0
+  }
+}
