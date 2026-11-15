@@ -28,9 +28,6 @@ gym.register_envs(ale_py)  # makes the "ALE/..." Atari games available
 ENV_ID = "ALE/BeamRider-v5"
 
 
-# ---------------------------------------------------------------------------
-# 1. Environment
-# ---------------------------------------------------------------------------
 def make_env(render_mode=None):
     """Create BeamRider with the standard DQN preprocessing.
 
@@ -45,9 +42,6 @@ def make_env(render_mode=None):
     return env
 
 
-# ---------------------------------------------------------------------------
-# 2. Q-Network (CNN built by us with torch.nn)
-# ---------------------------------------------------------------------------
 class QNetwork(nn.Module):
     """Input: 4 stacked frames. Output: one Q-value for every action."""
 
@@ -69,9 +63,6 @@ class QNetwork(nn.Module):
         return self.fc2(x)
 
 
-# ---------------------------------------------------------------------------
-# 3. Experience Replay Buffer
-# ---------------------------------------------------------------------------
 class ReplayBuffer:
     """Stores past experiences (s, a, r, s', done) and gives random batches."""
 
@@ -106,9 +97,6 @@ class ReplayBuffer:
         )
 
 
-# ---------------------------------------------------------------------------
-# 4. Epsilon-greedy action selection
-# ---------------------------------------------------------------------------
 def get_epsilon(step, eps_start, eps_end, eps_decay):
     """Linear decay: epsilon goes from eps_start to eps_end over eps_decay steps."""
     fraction = min(step / eps_decay, 1.0)
@@ -117,16 +105,13 @@ def get_epsilon(step, eps_start, eps_end, eps_decay):
 
 def select_action(state, epsilon, q_net, n_actions, device):
     if random.random() < epsilon:
-        return random.randrange(n_actions)            # explore: random action
+        return random.randrange(n_actions)            
     with torch.no_grad():
         state_t = torch.tensor(np.array(state), device=device).unsqueeze(0)
         q_values = q_net(state_t)
-    return int(q_values.argmax(dim=1).item())         # exploit: best action
+    return int(q_values.argmax(dim=1).item())         
 
 
-# ---------------------------------------------------------------------------
-# 5. One training step (Bellman equation + loss + backpropagation)
-# ---------------------------------------------------------------------------
 def train_step(online_net, target_net, buffer, optimizer, batch_size, gamma, device):
     states, actions, rewards, next_states, dones = buffer.sample(batch_size, device)
 
@@ -142,15 +127,13 @@ def train_step(online_net, target_net, buffer, optimizer, batch_size, gamma, dev
     loss = F.smooth_l1_loss(q_values, targets)
 
     optimizer.zero_grad()
-    loss.backward()                                            # backpropagation
-    nn.utils.clip_grad_norm_(online_net.parameters(), 10.0)    # avoid huge updates
-    optimizer.step()                                           # update online network
+    loss.backward()                                            
+    nn.utils.clip_grad_norm_(online_net.parameters(), 10.0)    
+    optimizer.step()                                           
     return loss.item()
 
 
-# ---------------------------------------------------------------------------
-# 6. Saving results (log, plot, model)
-# ---------------------------------------------------------------------------
+
 def save_log(log, path):
     with open(path, "w", newline="") as f:
         writer = csv.DictWriter(f, fieldnames=log[0].keys())
@@ -193,9 +176,6 @@ def save_results(online_net, log, out_dir, args):
     return final_avg
 
 
-# ---------------------------------------------------------------------------
-# 7. Main training loop
-# ---------------------------------------------------------------------------
 def train(args):
     device = "cuda" if torch.cuda.is_available() else "mps" if torch.backends.mps.is_available() else "cpu"
     print(f"Using device: {device}")
