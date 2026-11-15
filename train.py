@@ -2,7 +2,7 @@
 train.py - Train a Deep Q-Network (DQN) agent on Atari BeamRider.
 
 Example:
-    uv run train.py --member Larissa --exp exp1 --lr 0.0001 --gamma 0.99 \
+    uv run train.py --member Delucie --exp exp1 --lr 0.0001 --gamma 0.99 \
         --batch-size 32 --eps-start 1.0 --eps-end 0.05 --eps-decay 100000
 """
 
