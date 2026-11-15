@@ -25,7 +25,7 @@ def play(model_path, episodes):
     # rebuild the same network and load the trained weights
     q_net = QNetwork(n_actions).to(device)
     q_net.load_state_dict(torch.load(model_path, map_location=device))
-    q_net.eval()  
+    q_net.eval()
 
     for episode in range(1, episodes + 1):
         state, info = env.reset()
