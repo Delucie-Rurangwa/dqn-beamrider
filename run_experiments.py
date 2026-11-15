@@ -12,9 +12,8 @@ import argparse
 import subprocess
 import sys
 
-# Each row: (learning rate, gamma, batch size, epsilon start, epsilon end, epsilon decay)
 EXPERIMENTS = {
-    # Delucie: learning rate, gamma and batch size
+
     "delucie": {
         "folder": "Delucie_Rurangwa",
         "configs": [
@@ -36,7 +35,7 @@ EXPERIMENTS = {
             (0.00005, 0.90, 32, 1.0, 0.05, 50000),
         ],
     },
-    # Favor: exploration (epsilon) and mixed combinations
+
     "favor": {
         "folder": "Favor_Ekep-Obasi_Ayuk",
         "configs": [
