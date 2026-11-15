@@ -52,7 +52,7 @@ flowchart TD
 1. **Play:** the agent chooses an action with **ε-greedy** — random action with probability ε (explore), best Q-value action otherwise (exploit). ε decreases linearly from *epsilon start* to *epsilon end* over *epsilon decay* steps.
 2. **Store:** every experience `(state, action, reward, next_state, done)` goes into the **replay buffer** (30,000 experiences). Rewards are clipped to -1, 0, +1.
 3. **Learn (every 4 steps):** sample a random batch. The online network predicts `Q(s, a)`. The target network gives the **Bellman target**
-   `target = r + γ · max_a' Q_target(s', a')` (just `r` if the game ended).
+    `target = r + γ · max_a' Q_target(s', a')` (just `r` if the game ended).
 4. **Update:** Huber loss between prediction and target → backpropagation → Adam optimizer updates the online network.
 5. **Target update:** every 1,000 steps the online weights are copied into the target network so the targets stay stable.
 6. **Save:** model (`dqn_model.pth`), training log (episode, total steps, episode length, reward, epsilon) and training plot.
@@ -106,4 +106,4 @@ Scores change between games because BeamRider has built-in randomness (sticky ac
 different starting conditions).
 
 ## Gameplay Demonstration
-Video of the best agent: **_add video link here_**
+Video of the best agent: https://www.youtube.com/watch?v=HukXDl_t5hg
