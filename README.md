@@ -59,11 +59,11 @@ flowchart TD
 
 ## How to run (uv)
 ```bash
-uv sync                                   # install everything
+uv sync                                   
 uv run train.py --member Delucie_Rurangwa --exp exp1 --lr 0.0001 --gamma 0.99 --batch-size 32 --eps-start 1.0 --eps-end 0.05 --eps-decay 50000 --total-steps 100000
-uv run run_experiments.py --member delucie  # Delucie's 15 experiments
-uv run run_experiments.py --member favor    # Favor's 15 experiments
-uv run play.py                            # watch the best agent play (uses dqn_model.pth)
+uv run run_experiments.py --member delucie  
+uv run run_experiments.py --member favor    
+uv run play.py                            
 ```
 Each experiment is saved in `models/<member name>/<exp>/`:
 `dqn_model.pth`, `training_log.csv`, `training_plot.png`, `summary.json`.
