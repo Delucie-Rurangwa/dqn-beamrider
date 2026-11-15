@@ -3,7 +3,7 @@ play.py - Load the trained DQN model and watch it play BeamRider.
 
 Example:
     uv run play.py                                  
-    uv run play.py --model models/Larissa/exp3/dqn_model.pth --episodes 3
+    uv run play.py --model models/favor/exp3/dqn_model.pth --episodes 3
 """
 
 import argparse
